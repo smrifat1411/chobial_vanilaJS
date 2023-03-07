@@ -12,16 +12,37 @@ const dataFetch = async (searchInput) => {
 
 const searchBox = document.querySelector("#searchbox");
 
-// Function that look after when user type on searchbox
-let remainDelay;
-const onType = (e) => {
-  if (remainDelay) {
-    clearInterval(remainDelay);
-  }
+// Debounced or shield function
 
-  remainDelay = setTimeout((e) => {
-    dataFetch(e.target.value);
-  }, 1000);
+const shield = (func,delay=1000) => {
+  let remainDelay;
+
+  // when shield called in eventlistener this function(childFunc) back as reference and addEventListener will call it automatically
+
+
+  const childFunc =(event) => {
+    if (remainDelay) {
+      clearInterval(remainDelay);
+    }
+    remainDelay = setTimeout(() => {
+      func(event);
+    }, delay);
+  };
+
+  return childFunc
 };
 
-searchBox.addEventListener("input", onType);
+// Function that look after when user type on searchbox
+
+onType = (e) => {
+  dataFetch(e.target.value);
+};
+
+
+searchBox.addEventListener("input", shield(onType,500));
+
+
+//  tmp code
+// searchBox.addEventListener("input", (event)=>{
+//   onType(event)
+// });

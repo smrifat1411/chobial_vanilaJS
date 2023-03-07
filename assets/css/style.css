@@ -533,16 +533,16 @@ video {
   height: 1rem;
 }
 
-.h-\[75px\] {
-  height: 75px;
-}
-
 .h-\[60px\] {
   height: 60px;
 }
 
 .min-h-screen {
   min-height: 100vh;
+}
+
+.w-1\/4 {
+  width: 25%;
 }
 
 .w-4 {
@@ -557,21 +557,9 @@ video {
   width: 100vw;
 }
 
-.w-1\/4 {
-  width: 25%;
-}
-
 .min-w-min {
   min-width: -moz-min-content;
   min-width: min-content;
-}
-
-.max-w-\[24px\] {
-  max-width: 24px;
-}
-
-.max-w-\[40px\] {
-  max-width: 40px;
 }
 
 .max-w-\[50px\] {
@@ -655,6 +643,10 @@ video {
   padding-right: 1.25rem;
 }
 
+.text-\[18px\] {
+  font-size: 18px;
+}
+
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -663,18 +655,6 @@ video {
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
-}
-
-.text-\[24px\] {
-  font-size: 24px;
-}
-
-.text-\[20px\] {
-  font-size: 20px;
-}
-
-.text-\[18px\] {
-  font-size: 18px;
 }
 
 .text-gray-400 {
@@ -714,11 +694,6 @@ video {
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 
-.focus\:ring-red-300:focus {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(252 165 165 / var(--tw-ring-opacity));
-}
-
 .focus\:ring-blue-700:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(29 78 216 / var(--tw-ring-opacity));
@@ -730,16 +705,6 @@ video {
     border-color: rgb(63 63 70 / var(--tw-border-opacity));
   }
 
-  .dark\:bg-zinc-900 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(24 24 27 / var(--tw-bg-opacity));
-  }
-
-  .dark\:text-white {
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-  }
-
   .dark\:text-zinc-900 {
     --tw-text-opacity: 1;
     color: rgb(24 24 27 / var(--tw-text-opacity));
@@ -748,36 +713,6 @@ video {
   .dark\:ring-zinc-600 {
     --tw-ring-opacity: 1;
     --tw-ring-color: rgb(82 82 91 / var(--tw-ring-opacity));
-  }
-}
-
-@media (min-width: 1536px) {
-  .\32xl\:mx-auto {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .\32xl\:max-w-screen-2xl {
-    max-width: 1536px;
-  }
-
-  .\32xl\:border-x-2 {
-    border-left-width: 2px;
-    border-right-width: 2px;
-  }
-
-  .\32xl\:border-gray-200 {
-    --tw-border-opacity: 1;
-    border-color: rgb(229 231 235 / var(--tw-border-opacity));
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  @media (min-width: 1536px) {
-    .dark\:2xl\:border-zinc-700 {
-      --tw-border-opacity: 1;
-      border-color: rgb(63 63 70 / var(--tw-border-opacity));
-    }
   }
 }
 
