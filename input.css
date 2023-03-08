@@ -15,9 +15,21 @@
   gap: 10px;
 } 
 #resultContent{
-  gap:20px;
+  gap:20px; 
+}
+#resultBox{
+  width:360px;
+
 }
 
-/* .showclass{
-  display:none;
-} */
+#searchBox{
+max-width:360px;
+}
+
+.normal{
+display:none;
+}
+
+.isActive{
+display:block
+}

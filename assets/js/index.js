@@ -17,9 +17,10 @@ const dataFetch = async (searchInput) => {
 
 const leftSec = document.querySelector("#left_section");
 
-
-leftSec.innerHTML=`
-<div id="searchBar" class="relative h-3 items-center content-center flex">
+leftSec.innerHTML = `
+          <div id="searchBox">
+          <h1 class="text-3xl text-center" > Search for a Movie</h1>
+          <div id="searchBar" class="relative h-3 items-center content-center flex">
           <span class="text-gray-400 absolute left-4 cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -41,39 +42,45 @@ leftSec.innerHTML=`
             class="text-lg ring-1 bg-transparent ring-gray-200 dark:ring-zinc-600 focus:ring-blue-700 pl-10 pr-5 text-gray-600 dark:text-zinc-900 py-3 rounded-full w-full outline-none focus:ring-1"
             placeholder="Search ..."
           />
+
         </div>
         
-        <div id="resultBox" class="">
-          <div id="resultContent" class="flex flex-col w-[360px]">
+        
+
+        <div id="resultBox" class="normal">
+          <div id="resultContent" class="flex flex-col">
         
           </div>
         </div>
-`
+           </div>
+`;
 
-const inputSearch = document.querySelector("input")
+const inputSearch = document.querySelector("input");
 
-const resultBox = document.querySelector("#resultBox")
-const resultContent = document.querySelector("#resultContent")
+const resultBox = document.querySelector("#resultBox");
+const resultContent = document.querySelector("#resultContent");
+const searchContainer = document.querySelector("#searchBox");
 // console.log(resultBox);
 
 // Function that look after when user type on searchbox
 
 const onType = async (e) => {
   let allItems = await dataFetch(e.target.value);
- 
+  
+  resultContent.innerHTML = '';
 
-
-
-// play with data that we receive 
+  resultBox.classList.add("isActive")
+  // play with data that we receive
 
   allItems.forEach((item) => {
-    const div = document.createElement("div");
-    div.classList.add("searchitem");
+    const newElement = document.createElement("a");
+    // div.classList.add("max-w-[360px]");
+    
 
     const imgSrc = item.Poster;
 
     imgSrc === "N/A"
-      ? (div.innerHTML = `
+      ? (newElement.innerHTML = `
       <div
       id="searchItem"
       class=""
@@ -81,7 +88,7 @@ const onType = async (e) => {
     <span class="text-[18px] text-zinc-900">${item.Title}</span>
     </div>
     `)
-      : (div.innerHTML = `
+      : (newElement.innerHTML = `
       <div
       id="searchItem"
       class=" "
@@ -98,19 +105,24 @@ const onType = async (e) => {
               
     `);
 
-    resultContent.appendChild(div);
+    resultContent.appendChild(newElement);
   });
+
+  
+
 };
 
 inputSearch.addEventListener("input", shield(onType, 500));
 
+document.addEventListener("click", (e) => {
 
-document.addEventListener("click",e=>{
-  if (!leftSec.contains(e.target)) {
-    console.log("clicked");
+  // Aha I see you 
+
+  if (!searchContainer.contains(e.target)) {
+    resultBox.classList.remove("isActive")
   }
-  console.log("also clicked");
-})
+
+});
 
 // inputSearch.addEventListener("click", (e) => {console.log(e.target);});
 
