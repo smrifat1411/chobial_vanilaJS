@@ -691,6 +691,10 @@ video {
   padding-right: 1.25rem;
 }
 
+.pt-3 {
+  padding-top: 0.75rem;
+}
+
 .text-\[18px\] {
   font-size: 18px;
 }

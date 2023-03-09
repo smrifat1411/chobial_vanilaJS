@@ -47,7 +47,7 @@ leftSec.innerHTML = `
         
         
 
-        <div id="resultBox" class="normal">
+        <div id="resultBox" class="normal bg-green-600">
           <div id="resultContent" class="flex flex-col">
         
           </div>
@@ -66,16 +66,23 @@ const searchContainer = document.querySelector("#searchBox");
 
 const onType = async (e) => {
   let allItems = await dataFetch(e.target.value);
-  
-  resultContent.innerHTML = '';
 
-  resultBox.classList.add("isActive")
+  resultContent.innerHTML = "";
+
+  if (!allItems.length) {
+    resultBox.classList.remove("isActive");
+    return;
+  }
+
+  resultBox.classList.add("isActive");
+
   // play with data that we receive
 
   allItems.forEach((item) => {
+    // individual item looping from fetched data
+
     const newElement = document.createElement("a");
     // div.classList.add("max-w-[360px]");
-    
 
     const imgSrc = item.Poster;
 
@@ -91,7 +98,7 @@ const onType = async (e) => {
       : (newElement.innerHTML = `
       <div
       id="searchItem"
-      class=" "
+      class=" cursor-pointer"
     >
       <img
         class="max-w-[20px] max-h-[30px] xl:max-w-[30px] xl:max-h-[40px]"
@@ -105,24 +112,77 @@ const onType = async (e) => {
               
     `);
 
+    // This eventlistener start doing shit with each item/movie
+
+    newElement.addEventListener("click", (e) => {
+      resultBox.classList.remove("isActive");
+
+      inputSearch.value = item.Title;
+
+      onSelectMovie(item);
+    });
+
     resultContent.appendChild(newElement);
   });
-
-  
-
 };
 
 inputSearch.addEventListener("input", shield(onType, 500));
 
 document.addEventListener("click", (e) => {
-
-  // Aha I see you 
+  // Aha I see you
 
   if (!searchContainer.contains(e.target)) {
-    resultBox.classList.remove("isActive")
+    resultBox.classList.remove("isActive");
   }
-
 });
+
+
+
+
+// searchBox auto complete main function 
+
+
+const autoComplete =(element)=>{
+  
+}
+
+
+
+
+
+// helper function for fetch eatch item data by id
+
+const onSelectMovie = async (obj) => {
+  let id = obj.imdbID
+  const response = await axios.get("https://www.omdbapi.com/", {
+    params: {
+      apikey: "f82024a5",
+      i:id
+    },
+  });
+
+  document.querySelector("#summary").innerHTML=onMovieTemplate(response.data)
+
+};
+
+// helper function for doing all task after fetch a single item by id 
+
+const onMovieTemplate = (itemObj)=>{
+  return `
+  <div
+            class="flex p-2 gap-5 bg-slate-400 shadow-md hover:shodow-lg rounded-2xl"
+          >
+          <img src="${itemObj.Poster}" width="150px" height="200px" alt="">
+            <div class="flex flex-col">
+              <h1 class="text-2xl">${itemObj.Title}</h1>
+              <h4 class="py-3 text-xl">${itemObj.Genre}</h4>
+              <p class="pt-2">${itemObj.Plot}</p>
+
+            </div>
+          </div>
+  `
+
+}
 
 // inputSearch.addEventListener("click", (e) => {console.log(e.target);});
 
