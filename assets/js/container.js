@@ -1,4 +1,5 @@
-const containerFunc = (element,renderLogicFunc) => {
+const containerFunc = ({element, movieRenderLogic,dataFetch,onSelectMovieWrapper,onMovieTemplate}) => {
+//   console.log(element);
     element.innerHTML = `
     <div id="searchBox">
     <h1 class="text-3xl text-center" > Search for a Movie</h1>
@@ -35,56 +36,54 @@ const containerFunc = (element,renderLogicFunc) => {
   </div>
      </div> 
     `;
-  
-    const resultBox = element.querySelector("#resultBox");
-    const resultContent = element.querySelector("#resultContent");
-    const searchContainer = element.querySelector("#searchBox");
-    const inputSearch = document.querySelector("input");
-  
-    const onType = async (e) => {
-      let allItems = await dataFetch(e.target.value);
-  
-      resultContent.innerHTML = "";
-  
-      if (!allItems.length) {
+
+  const inputSearch = element.querySelector("input");
+  const resultBox = element.querySelector("#resultBox");
+  const resultContent = element.querySelector("#resultContent");
+  const searchContainer = element.querySelector("#searchBox");
+
+  const onType = async (e) => {
+    let allItems = await dataFetch(e.target.value);
+
+    resultContent.innerHTML = "";
+
+    if (!allItems.length) {
+      resultBox.classList.remove("isActive");
+      return;
+    }
+
+    resultBox.classList.add("isActive");
+
+    // play with data that we receive
+
+    allItems.forEach((item) => {
+      // individual item looping from fetched data
+
+      const newElement = document.createElement("a");
+      // div.classList.add("max-w-[360px]");
+
+      newElement.innerHTML = movieRenderLogic(item);
+
+      // This eventlistener start doing shit with each item/movie
+
+      newElement.addEventListener("click", (e) => {
         resultBox.classList.remove("isActive");
-        return;
-      }
-  
-      resultBox.classList.add("isActive");
-  
-      // play with data that we receive
-  
-      allItems.forEach((item) => {
-        // individual item looping from fetched data
-  
-        const newElement = document.createElement("a");
-        // div.classList.add("max-w-[360px]");
-  
-        
-  
-        newElement.innerHTML = renderLogicFunc(item)
-  
-        // This eventlistener start doing shit with each item/movie
-  
-        newElement.addEventListener("click", (e) => {
-          resultBox.classList.remove("isActive");
-  
-          inputSearch.value = item.Title;
-  
-          onSelectMovie(item);
-        });
-  
-        resultContent.appendChild(newElement);
+
+        inputSearch.value = item.Title;
+
+        onSelectMovieWrapper(item);
       });
-    };
-  
-    inputSearch.addEventListener("input", shield(onType, 500));
-    document.addEventListener("click", (e) => {
-      // Aha I see you
-  
-      if (!searchContainer.contains(e.target)) {
-        resultBox.classList.remove("isActive");
-      }
+
+      resultContent.appendChild(newElement);
     });
   };
+
+  inputSearch.addEventListener("input", shield(onType, 500));
+
+   // Aha I see you
+  document.addEventListener("click", (e) => {
+    if (!searchContainer.contains(e.target)) {
+      resultBox.classList.remove("isActive");
+    }
+  });
+};

@@ -18,12 +18,12 @@
   gap:20px; 
 }
 #resultBox{
-  width:360px;
+ 
 
 }
 
 #searchBox{
-max-width:360px;
+
 }
 
 .normal{
@@ -32,4 +32,7 @@ display:none;
 
 .isActive{
 display:block
+}
+#image-details-box{
+gap:20px;
 }
