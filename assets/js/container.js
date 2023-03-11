@@ -1,7 +1,7 @@
 const containerFunc = ({element, movieRenderLogic,dataFetch,onSelectMovieWrapper,onMovieTemplate}) => {
 //   console.log(element);
     element.innerHTML = `
-    <div id="searchBox">
+    <div id="searchBox" class="relative">
     <h1 class="text-3xl text-center" > Search for a Movie</h1>
     <div id="searchBar" class="relative h-3 items-center content-center flex">
     <span class="text-gray-400 absolute left-4 cursor-pointer">
@@ -29,11 +29,11 @@ const containerFunc = ({element, movieRenderLogic,dataFetch,onSelectMovieWrapper
    
   </div>
   
-  <div id="resultBox" class="normal bg-green-600">
-    <div id="resultContent" class="flex flex-col">
+    <div id="resultBox" class="normal absolute">
+    <div id="resultContent" class="flex flex-col bg-red-600">
   
     </div>
-  </div>
+    </div>
      </div> 
     `;
 
@@ -61,7 +61,7 @@ const containerFunc = ({element, movieRenderLogic,dataFetch,onSelectMovieWrapper
 
       const newElement = document.createElement("a");
       // div.classList.add("max-w-[360px]");
-
+      newElement.classList.add("searchItem")
       newElement.innerHTML = movieRenderLogic(item);
 
       // This eventlistener start doing shit with each item/movie

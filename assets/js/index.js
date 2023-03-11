@@ -23,10 +23,7 @@ const movieRenderLogic = (item) => {
       : item.Poster;
 
   return `
-  <div
-  id="searchItem"
-  class=" cursor-pointer"
->
+
 
   <img
     class="max-w-[20px] max-h-[30px] xl:max-w-[30px] xl:max-h-[40px]"
@@ -36,7 +33,7 @@ const movieRenderLogic = (item) => {
     height="50"
   />
   <span class="text-[18px] text-zinc-900">${item.Title}</span>
-</div>
+
   `;
 };
 
@@ -52,7 +49,7 @@ const onSelectMovie = async (obj, summaryElement) => {
   });
 
 
-console.log(response.data);
+
   summaryElement.innerHTML = onMovieTemplate(response.data);
 };
 
@@ -97,6 +94,7 @@ containerFunc({
 
   onMovieTemplate,
 });
+
 containerFunc({
   element: rightSec,
   movieRenderLogic,
@@ -108,10 +106,3 @@ containerFunc({
   onMovieTemplate,
 });
 
-
-//  containerFunc({element:rightSec,
-//   movieRenderLogic,
-//   dataFetch,
-//   onSelectMovie,
-//   onMovieTemplate});
-// containerFunc({rightSec, movieRenderLogic,dataFetch});

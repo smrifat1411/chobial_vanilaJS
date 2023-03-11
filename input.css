@@ -9,17 +9,18 @@
 @layer components {
 }
 
- #searchItem {
+ .searchItem {
   display: flex;
   align-items: center;
   gap: 10px;
+ 
 } 
 #resultContent{
   gap:20px; 
 }
 #resultBox{
- 
-
+background:white;
+z-index:20;
 }
 
 #searchBox{
