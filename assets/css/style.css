@@ -593,16 +593,16 @@ video {
   width: 1rem;
 }
 
+.w-\[50\%\] {
+  width: 50%;
+}
+
 .w-full {
   width: 100%;
 }
 
 .w-screen {
   width: 100vw;
-}
-
-.w-\[50\%\] {
-  width: 50%;
 }
 
 .min-w-min {
@@ -612,10 +612,6 @@ video {
 
 .max-w-\[50px\] {
   max-width: 50px;
-}
-
-.max-w-\[80\%\] {
-  max-width: 80%;
 }
 
 .cursor-pointer {
@@ -748,7 +744,7 @@ video {
   --tw-ring-color: rgb(229 231 235 / var(--tw-ring-opacity));
 }
 
-#searchItem {
+.searchItem {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -759,6 +755,8 @@ video {
 }
 
 #resultBox{
+  background:white;
+  z-index:20;
 }
 
 #searchBox{
